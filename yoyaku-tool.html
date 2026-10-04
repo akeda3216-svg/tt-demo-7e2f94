@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>予約状況つくーる（見本）｜Totia 西宮北口</title>
+<style>
+:root{--g:#1d2c25;--gold:#c9a96a;--iv:#f3ede2}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;background:var(--iv);color:#22302a;line-height:1.7;padding:16px}
+.wrap{max-width:720px;margin:0 auto}
+h1{font-size:20px;margin-bottom:4px}
+.sub{font-size:13px;color:#5a6a61;margin-bottom:14px}
+.card{background:#fff;border:1px solid #cdbf9f;border-radius:10px;padding:14px;margin-bottom:12px}
+.card h2{font-size:15px;margin-bottom:8px}
+.days{display:grid;gap:8px}
+.day{display:grid;grid-template-columns:86px 1fr;gap:8px;align-items:center}
+.day b{font-size:14px}
+.sl{display:flex;flex-wrap:wrap;gap:6px}
+.t{border:1px solid #b9a06a;background:#fff;border-radius:999px;padding:4px 12px;font-size:13px;cursor:pointer}
+.t[aria-pressed="true"]{background:var(--g);color:var(--gold);border-color:var(--g)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+label{font-size:13px}
+select,input{font:inherit;padding:6px 10px;border:1px solid #b9a06a;border-radius:6px;background:#fff}
+.btn{border:0;background:var(--g);color:var(--gold);font-weight:700;border-radius:8px;padding:10px 18px;cursor:pointer}
+.btn.l{background:#fff;color:var(--g);border:1px solid var(--g)}
+textarea{width:100%;min-height:150px;font:inherit;padding:10px;border:1px solid #b9a06a;border-radius:8px;background:#fffdf7}
+.pv{display:flex;justify-content:center;margin:10px 0}
+canvas{max-width:100%;height:auto;border-radius:8px;box-shadow:0 8px 20px rgba(0,0,0,.2)}
+.nt{font-size:12px;color:#6b786f}
+.ok{color:#1d6a3c;font-size:13px;min-height:1.4em}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>予約状況つくーる（見本）</h1>
+<p class="sub">空いている時間をタップ → お知らせ文と投稿用の画像が、自動でできます。入力した内容は、この端末の外には送られません。</p>
+
+<div class="card"><h2>1. 空いている日と時間を、えらぶ</h2><div class="days" id="days"></div></div>
+
+<div class="card"><h2>2. 言い回しを、えらぶ</h2>
+ <div class="row"><label>お店の呼び方 <select id="tone"><option value="a">やわらかい（まだ空きがございます♪）</option><option value="b">ていねい（ご予約を承っております）</option></select></label>
+ <label>少ない目安 <select id="few"><option value="1">1枠</option><option value="2" selected>2枠</option><option value="3">3枠</option></select></label></div></div>
+
+<div class="card"><h2>3. お知らせ文（そのままコピー）</h2>
+ <textarea id="txt" aria-live="polite"></textarea>
+ <div class="row"><button class="btn" id="cp">文をコピー</button><span class="ok" id="ok"></span></div></div>
+
+<div class="card"><h2>4. 投稿用の画像（1080×1350）</h2>
+ <div class="pv"><canvas id="cv" width="1080" height="1350" style="width:min(100%,300px)"></canvas></div>
+ <div class="row"><button class="btn l" id="dl">画像を保存</button></div>
+ <p class="nt">※ これは見本です。色・書体・言い回しは、お店のご希望に合わせて、仕上げます。</p></div>
+</div>
+<script>
+(function(){
+  var T=["10:00","11:30","13:00","14:30","16:00","17:30","19:00"],W="日月火水木金土";
+  var d0=new Date(),days=[],sel={},box=document.getElementById("days");
+  for(var i=1;i<=5;i++){var d=new Date(d0.getFullYear(),d0.getMonth(),d0.getDate()+i);days.push(d)}
+  function key(d){return d.getMonth()+1+"/"+d.getDate()}
+  days.forEach(function(d){
+    sel[key(d)]=[];var r=document.createElement("div");r.className="day";
+    r.innerHTML="<b>"+key(d)+"（"+W[d.getDay()]+"）</b>";var s=document.createElement("div");s.className="sl";
+    T.forEach(function(t){var b=document.createElement("button");b.type="button";b.className="t";b.textContent=t;b.setAttribute("aria-pressed","false");
+      b.addEventListener("click",function(){var a=sel[key(d)],i=a.indexOf(t);if(i<0)a.push(t);else a.splice(i,1);b.setAttribute("aria-pressed",i<0?"true":"false");render()});s.appendChild(b)});
+    r.appendChild(s);box.appendChild(r)});
+  var tone=document.getElementById("tone"),few=document.getElementById("few"),txt=document.getElementById("txt"),cv=document.getElementById("cv"),ctx=cv.getContext("2d");
+  function lines(){
+    var f=+few.value,out=[];
+    days.forEach(function(d){var a=sel[key(d)].slice().sort();var n=a.length;var head=key(d)+"（"+W[d.getDay()]+"）";
+      if(n===0)out.push({h:head,s:"満席です",c:"#9aa39d"});
+      else if(n<=f)out.push({h:head,s:"あと"+n+"枠："+a.join(" / "),c:"#c9a96a"});
+      else out.push({h:head,s:"空きあり："+a.join(" / "),c:"#f3ede2"})});
+    return out}
+  function render(){
+    var L=lines(),a=tone.value==="a";
+    var s=(a?"【Totia 西宮北口｜今週のご予約状況】\nまだ空きがございます♪\n\n":"【Totia 西宮北口｜ご予約状況のお知らせ】\n下記の日時で、ご予約を承っております。\n\n");
+    L.forEach(function(x){s+=x.h+"　"+x.s+"\n"});
+    s+="\nご予約はプロフィールのリンクから。\n（営業時間：平日10:00〜21:00／土日祝9:00〜21:00・年中無休）";
+    txt.value=s;
+    ctx.fillStyle="#1d2c25";ctx.fillRect(0,0,1080,1350);
+    ctx.strokeStyle="#c9a96a";ctx.lineWidth=3;ctx.strokeRect(40,40,1000,1270);
+    ctx.fillStyle="#f3ede2";ctx.textAlign="center";
+    ctx.font="600 76px 'Hiragino Mincho ProN','Yu Mincho',serif";ctx.fillText("Totia",540,170);
+    ctx.font="26px 'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif";ctx.fillStyle="#b9b3a4";ctx.fillText("NISHI-KITAGUCHI",540,215);
+    ctx.fillStyle="#c9a96a";ctx.font="700 46px 'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif";ctx.fillText(a?"今週のご予約状況":"ご予約状況のお知らせ",540,330);
+    var y=420;L.forEach(function(x){ctx.textAlign="left";ctx.fillStyle="#f3ede2";ctx.font="700 40px 'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif";ctx.fillText(x.h,110,y);
+      ctx.fillStyle=x.c;ctx.font="34px 'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif";var t=x.s;if(t.length>20)t=t.slice(0,19)+"…";ctx.fillText(t,110,y+52);
+      ctx.strokeStyle="rgba(201,169,106,.4)";ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(110,y+82);ctx.lineTo(970,y+82);ctx.stroke();y+=150});
+    ctx.textAlign="center";ctx.fillStyle="#b9b3a4";ctx.font="26px 'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif";ctx.fillText("ご予約はプロフィールのリンクから",540,1250)}
+  [tone,few].forEach(function(e){e.addEventListener("change",render)});
+  document.getElementById("cp").addEventListener("click",function(){txt.select();var ok=document.getElementById("ok");try{navigator.clipboard.writeText(txt.value).then(function(){ok.textContent="コピーしました"},function(){document.execCommand("copy");ok.textContent="コピーしました"})}catch(e){document.execCommand("copy");ok.textContent="コピーしました"}});
+  document.getElementById("dl").addEventListener("click",function(){var a=document.createElement("a");a.download="yoyaku.png";a.href=cv.toDataURL("image/png");a.click()});
+  /* 見本として、最初から数枠を選んでおく */
+  [0,1,2,3,4].forEach(function(i){var k=key(days[i]);var ts=[["13:00","14:30"],["11:30","16:00","17:30"],["10:00"],[],["14:30","19:00","10:00","13:00"]][i];var btns=box.children[i].querySelectorAll(".t");ts.forEach(function(t){sel[k].push(t);btns[T.indexOf(t)].setAttribute("aria-pressed","true")})});
+  render();
+})();
+</script>
+</body>
+</html>
