@@ -107,6 +107,90 @@ h1 em{font-style:normal;color:var(--gold)}
 .vmode .ctl .sws,.vmode .ctl .lens{display:none}
 .vmode .ctl .cname{display:none}
 .anim .fog{animation:wipe 2.4s var(--ease) .5s both}
+
+/* ===== 下層 ===== */
+body{background:var(--ivory);color:#22302a}
+.after{position:relative;background:var(--ivory);color:#22302a}
+.sec{position:relative;max-width:1080px;margin:0 auto;padding:96px 22px}
+@media(min-width:900px){.sec{padding:128px 40px}}
+.kk{display:block;font-family:"Cormorant Garamond",serif;font-style:italic;font-weight:600;font-size:20px;letter-spacing:.14em;color:#9a7a3e;margin-bottom:6px}
+.big{font-family:"Shippori Mincho",serif;font-weight:700;font-size:clamp(25px,4.2vw,48px);line-height:1.45;letter-spacing:.06em;margin-bottom:18px}
+.big em{font-style:normal;background:linear-gradient(transparent 68%,rgba(201,169,106,.5) 68%)}
+.ld{max-width:35em;color:#5a6a61}
+.nt{font-size:12.5px;color:#6b786f;line-height:1.8;margin-top:14px}
+.js .fd{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .fd.in{opacity:1;transform:none}
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;align-items:center;justify-content:space-between;padding:8px 16px;background:rgba(29,44,37,.95);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--ivory);transform:translateY(-110%);transition:transform .4s}
+.nav.show{transform:none}
+.nav b{font-family:"Cormorant Garamond",serif;font-weight:600;letter-spacing:.22em;font-size:22px}
+.nav nav{display:none;gap:20px;font-size:13px}.nav nav a{text-decoration:none}
+.nav .cta{margin:0;min-height:40px;padding:6px 18px;font-size:13px}
+@media(min-width:900px){.nav nav{display:flex}.nav{padding:8px 40px}}
+.dk{background:var(--green);color:var(--ivory)}
+.dk .kk{color:var(--gold)}.dk .ld{color:#cfc9b8}.dk .nt{color:#b9b3a4}
+
+/* 1 安心の数字 */
+.nums{display:grid;gap:14px;margin-top:10px}
+@media(min-width:760px){.nums{grid-template-columns:repeat(3,1fr)}}
+.nm{background:rgba(243,237,226,.07);border:1px solid rgba(201,169,106,.45);border-radius:6px;padding:26px 22px}
+.nm .n{font-family:"Cormorant Garamond",serif;font-weight:600;font-size:clamp(44px,6vw,68px);line-height:1;color:var(--gold)}
+.nm .n small{font-size:.38em;margin-left:4px;letter-spacing:.1em}
+.nm p{margin-top:8px;font-size:14.5px;color:#d3cdbd}
+
+/* 2 似合わせ（スタイリスト） */
+.sty{display:grid;gap:14px;margin-top:6px}
+@media(min-width:760px){.sty{grid-template-columns:repeat(3,1fr)}}
+.sc{border:1px solid #cdbf9f;border-radius:6px;padding:24px 22px;background:#fbf7ee}
+.sc .rl{font-family:"Cormorant Garamond",serif;font-style:italic;color:#9a7a3e;letter-spacing:.1em}
+.sc b{display:block;font-family:"Shippori Mincho",serif;font-size:21px;margin:2px 0 6px}
+.sc .yr{font-size:12.5px;color:#6b786f}
+.sc p{margin-top:8px;font-size:14.5px;color:#4a5a51;line-height:1.8}
+
+/* 3 メニュー（開閉） */
+.acc details{border-bottom:1px solid rgba(201,169,106,.45)}
+.acc details:first-of-type{border-top:1px solid rgba(201,169,106,.45)}
+.acc summary{list-style:none;cursor:pointer;padding:20px 44px 20px 0;position:relative;font-family:"Shippori Mincho",serif;font-weight:700;font-size:18px;min-height:56px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary::after{content:"+";position:absolute;right:6px;top:14px;font-size:28px;color:var(--gold);transition:transform .25s}
+.acc details[open] summary::after{transform:rotate(45deg)}
+.acc .bd{padding:0 0 20px;color:#cfc9b8;font-size:15px;max-width:40em}
+.tbd{display:inline-block;margin-top:8px;border:1px dashed rgba(201,169,106,.7);border-radius:6px;padding:4px 12px;font-size:13px;color:#e2d6b6}
+
+/* 4 道順（駅から1分） */
+.route{position:relative;display:grid;gap:0;max-width:700px;margin-top:10px}
+.rt{position:relative;padding:0 0 30px 58px}
+.rt::before{content:"";position:absolute;left:21px;top:8px;bottom:-8px;border-left:2px dashed #b9a06a}
+.rt:last-child::before{display:none}
+.rt i{position:absolute;left:0;top:0;width:44px;height:44px;border-radius:50%;background:var(--green);color:var(--gold);display:grid;place-items:center;font-style:normal;font-family:"Cormorant Garamond",serif;font-weight:600;font-size:22px}
+.rt b{display:block;font-family:"Shippori Mincho",serif;font-size:19px}
+.rt span{font-size:14.5px;color:#4a5a51}
+.rt.go i{background:var(--gold);color:var(--green)}
+
+/* 5 特典：予約状況ページ */
+.gift{background:linear-gradient(160deg,#2a3d34,var(--green));color:var(--ivory)}
+.gift .box{border:1px solid var(--gold);border-radius:8px;padding:28px 24px;max-width:760px;background:rgba(243,237,226,.06)}
+.gift .tag{display:inline-block;background:var(--gold);color:#1a241e;font-weight:700;font-size:12.5px;letter-spacing:.14em;padding:2px 14px;border-radius:2px}
+.gift h3{font-family:"Shippori Mincho",serif;font-weight:700;font-size:clamp(22px,3vw,32px);line-height:1.5;margin:10px 0 8px}
+.gift ul{list-style:none;display:grid;gap:8px;margin:12px 0}
+.gift li{padding-left:22px;position:relative;font-size:15px;color:#e6dfcc}
+.gift li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:1px;background:var(--gold)}
+
+/* 6 FAQ */
+.faq details{border-bottom:1px solid #cdbf9f}
+.faq details:first-of-type{border-top:1px solid #cdbf9f}
+.faq summary{list-style:none;cursor:pointer;padding:20px 44px 20px 0;position:relative;font-family:"Shippori Mincho",serif;font-weight:700;font-size:17px;min-height:56px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:6px;top:14px;font-size:28px;color:#9a7a3e;transition:transform .25s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq .bd{padding:0 0 20px;color:#4a5a51;font-size:15px;max-width:40em}
+
+/* ラスト */
+.fin{text-align:center;padding:100px 22px 130px;background:radial-gradient(80% 70% at 70% 30%,#34503f 0,transparent 60%),linear-gradient(160deg,#25382f,#15201b);color:var(--ivory)}
+.fin h2{font-family:"Shippori Mincho",serif;font-weight:700;font-size:clamp(26px,5vw,54px);line-height:1.5;margin-bottom:14px}
+.fin p{max-width:30em;margin:0 auto 24px;color:#d3cdbd}
+.fin .cta{margin-top:0}
+footer.ft{background:#0e1713;color:#b9b3a4;text-align:center;font-size:12px;padding:14px 20px 24px}
+@media(prefers-reduced-motion:reduce){.js .fd{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
@@ -157,6 +241,93 @@ h1 em{font-style:normal;color:var(--gold)}
   <p class="note">※ 映像・画像はAI生成のイメージです。お店の実際の写真ではありません</p>
 </header>
 
+<div class="after" id="after">
+<div class="nav" id="nav"><b>Totia</b><nav aria-label="ページ内メニュー"><a href="#proof">安心</a><a href="#stylist">スタイリスト</a><a href="#menu">メニュー</a><a href="#route">道順</a><a href="#gift">ご予約の前に</a></nav><a class="cta" href="https://beauty.hotpepper.jp/slnH000800843/" target="_blank" rel="noopener">予約する</a></div>
+
+<section class="dk" id="proof"><div class="sec">
+  <span class="kk fd">proof</span>
+  <h2 class="big fd">オープンして間もなく、<br><em>多くの方</em>に選ばれています。</h2>
+  <p class="ld fd">ホットペッパービューティーの口コミより（2026年10月時点）。</p>
+  <div class="nums">
+    <div class="nm fd"><div class="n">4.80</div><p>口コミ平均（5点満点）</p></div>
+    <div class="nm fd"><div class="n">244<small>件</small></div><p>口コミ件数。そのうち、5点が207件</p></div>
+    <div class="nm fd"><div class="n">20<small>代</small>〜50<small>代以上</small></div><p>幅広い年代の方に、ご利用いただいています</p></div>
+  </div>
+  <p class="nt fd">評価されているのは、「丁寧なカウンセリング」「理想どおりの仕上がり」「落ち着いた雰囲気」「清潔感」「各席のテレビ」「気さくで、ほどよい距離感のスタッフ」。<br>※ 数字・傾向は、ホットペッパービューティーの公開情報をもとにしています。口コミの原文は、掲載していません。</p>
+</div></section>
+
+<section id="stylist"><div class="sec">
+  <span class="kk fd">stylist</span>
+  <h2 class="big fd">「似合う」を、<em>一緒に</em>見つけます。</h2>
+  <div class="sty">
+    <div class="sc fd"><span class="rl">Manager</span><b>古請 優太</b><span class="yr">歴11年</span><p>トレンドを取り入れた、似合わせスタイルが得意です。</p></div>
+    <div class="sc fd"><span class="rl">Sub chief</span><b>山元 政弥</b><span class="yr">歴11年</span><p>「あなたの『似合う』を、一緒に見つけましょう」</p></div>
+    <div class="sc fd"><span class="rl">Top designer</span><b>國本 滉平</b><span class="yr">歴8年</span><p>「似合う髪型、似合うカラー、一緒にみつけましょう」</p></div>
+  </div>
+  <p class="nt fd">※ スタイリストの情報は、ホットペッパービューティーの掲載内容をもとにしています。掲載前に、ご本人・お店のご確認をいただきます。写真は載せていません。</p>
+</div></section>
+
+<section class="dk acc" id="menu"><div class="sec">
+  <span class="kk fd">menu</span>
+  <h2 class="big fd">メニューは、<em>わかりやすく</em>。</h2>
+  <div class="fd">
+    <details open><summary>カット・カラー</summary><div class="bd">カットとカラーは、ご利用の多いメニューです（口コミでは、カットが232件、カラーが155件）。<br><span class="tbd">料金は、お店にご確認のうえ、こちらに掲載します</span></div></details>
+    <details><summary>縮毛矯正・パーマ</summary><div class="bd">縮毛矯正（口コミ70件）、デジタルパーマなどのメニューがあります。<br><span class="tbd">料金・所要時間は、お店にご確認のうえ掲載します</span></div></details>
+    <details><summary>トリートメント・ケア</summary><div class="bd">トリートメントは、口コミで78件のご利用があります。マイクロバブルケアもあります。<br><span class="tbd">料金は、お店にご確認のうえ掲載します</span></div></details>
+    <details><summary>メンズ</summary><div class="bd">メンズカット（シャンプー込み）に対応しています。<br><span class="tbd">料金は、お店にご確認のうえ掲載します</span></div></details>
+  </div>
+  <p class="nt fd">※ メニューの種類は、ホットペッパービューティーの掲載・口コミ件数をもとにしています。最新のクーポン・料金は、ご予約ページでご確認ください。</p>
+</div></section>
+
+<section id="route"><div class="sec">
+  <span class="kk fd">access</span>
+  <h2 class="big fd">西宮北口駅から、<em>徒歩1分</em>。</h2>
+  <p class="ld fd" style="margin-bottom:22px">道順は、3ステップです。</p>
+  <div class="route fd">
+    <div class="rt"><i>1</i><b>西宮北口駅の「北出口」へ</b><span>改札を出て、北出口に進みます。</span></div>
+    <div class="rt"><i>2</i><b>アクタ西宮の西館の通路を、まっすぐ</b><span>通路を進みます。</span></div>
+    <div class="rt"><i>3</i><b>階段で1階へ。正面の横断歩道を渡る</b><span>渡ってすぐの先が、お店です。</span></div>
+    <div class="rt go"><i>★</i><b>Totia 西宮北口</b><span>兵庫県西宮市北口町2-10 プチシャルマン1F（ヨーロッパ調の外観が、目印です）</span></div>
+  </div>
+  <p class="nt fd">※ 道順は、ホットペッパービューティーの掲載をもとにしています。</p>
+</div></section>
+
+<section class="gift" id="gift"><div class="sec">
+  <span class="kk fd" style="color:var(--gold)">special</span>
+  <h2 class="big fd">ご依頼いただいた場合の<em>特典</em>。</h2>
+  <div class="box fd">
+    <span class="tag">特典（追加費用なし）</span>
+    <h3>「予約状況」を、毎日のLINE・Instagram投稿に変える<br>自動つくりツール</h3>
+    <p class="ld" style="color:#e6dfcc">ブログを拝見すると、毎日「明日は、まだ少しだけ空きがあります」と、手作業でお知らせされていました。この手間を、減らすための道具です。</p>
+    <ul>
+      <li>空き枠（日付・時間）を入力すると、お知らせ文と、投稿用の画像が、自動でできます</li>
+      <li>「あと◯席」「満席」など、お店の言い回しに、そろえます</li>
+      <li>スマホのブラウザだけで使えます（アプリのインストールは、不要です）</li>
+    </ul>
+    <p class="nt" style="color:#b9b3a4">※ 特典の内容は、お店の運用をうかがってから、最終の形を決めます。お渡しは、ホームページの公開と、同時期を目安にしています。</p>
+  </div>
+</div></section>
+
+<section class="faq" id="faq"><div class="sec">
+  <span class="kk fd">faq</span>
+  <h2 class="big fd">ご予約の前に。</h2>
+  <div class="fd">
+    <details open><summary>予約は、どこからできますか？</summary><div class="bd">ホットペッパービューティーのページから、空き状況を見て、ご予約いただけます。</div></details>
+    <details><summary>営業時間は？</summary><div class="bd">平日は10:00〜21:00、土日祝は9:00〜21:00です。年中無休です（1月1日〜3日を除く）。</div></details>
+    <details><summary>男性もできますか？</summary><div class="bd">はい。メンズカット（シャンプー込み）があります。口コミでも、男性の方のご利用が、あります。</div></details>
+    <details><summary>お店の場所が、わかりにくくないですか？</summary><div class="bd">西宮北口駅の北出口から、徒歩1分です。上の「道順」の3ステップを、ご覧ください。</div></details>
+    <details><summary>どんな席ですか？</summary><div class="bd">セット面は8席。口コミでは、「落ち着いた雰囲気」「清潔感」「各席にテレビ」の声があります。</div></details>
+  </div>
+</div></section>
+
+<section class="fin" id="fin">
+  <h2 class="fd">鏡を見る度に、<br>うれしくなる。</h2>
+  <p class="fd">西宮北口で、あなたの「似合う」を、一緒に。</p>
+  <a class="cta fd" href="https://beauty.hotpepper.jp/slnH000800843/" target="_blank" rel="noopener">空き状況を見て、予約する</a>
+</section>
+<footer class="ft">映像・画像はAI生成のイメージです。料金・メニューの詳細などは、お店にご確認のうえ掲載します。</footer>
+</div>
+
 <script>
 (function(){
   var root=document.documentElement,hero=document.getElementById("hero");
@@ -196,6 +367,16 @@ h1 em{font-style:normal;color:var(--gold)}
     vshow(0);
     if("IntersectionObserver" in window){new IntersectionObserver(function(es){es.forEach(function(e){var v=vids[vc];if(!v)return;if(e.isIntersecting){v.play&&v.play().catch(function(){})}else{v.pause()}})},{threshold:.1}).observe(vbox)}
   }
+
+
+  /* ---- 下層 ---- */
+  var nav=document.getElementById("nav");
+  var onS=function(){nav.classList.toggle("show",window.scrollY>hero.offsetHeight*.7)};
+  window.addEventListener("scroll",onS,{passive:true});onS();
+  var fds=document.querySelectorAll(".fd");
+  if("IntersectionObserver" in window&&visible){root.classList.add("js");
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{rootMargin:"0px 0px -8% 0px"});
+    fds.forEach(function(el){io.observe(el)});setTimeout(function(){fds.forEach(function(el){el.classList.add("in")})},5000)}
 
   /* 鏡の光：指・マウスの動きについてくる（操作がなければ、ゆっくり往復） */
   var used=false,t0=performance.now(),glass=document.getElementById("glass");
