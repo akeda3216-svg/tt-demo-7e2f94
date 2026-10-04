@@ -49,7 +49,7 @@ h1 em{font-style:normal;color:var(--gold)}
 .anim .fog{animation:wipe 2.4s var(--ease) .5s both}
 @keyframes wipe{from{clip-path:inset(0 0 0 0)}to{clip-path:inset(0 0 0 100%)}}
 .noanim .fog{display:none}
-.tagc{position:absolute;z-index:5;left:50%;bottom:16px;transform:translateX(-50%);font-family:"Cormorant Garamond",serif;font-style:italic;font-size:15px;letter-spacing:.14em;white-space:nowrap;text-shadow:0 2px 10px rgba(0,0,0,.5)}
+.tagc{position:absolute;z-index:5;left:50%;bottom:14px;background:rgba(18,28,22,.55);padding:2px 14px;border-radius:999px;transform:translateX(-50%);font-family:"Cormorant Garamond",serif;font-style:italic;font-size:15px;letter-spacing:.14em;white-space:nowrap;text-shadow:0 2px 10px rgba(0,0,0,.5)}
 
 .ctl{margin-top:14px;display:grid;gap:10px}
 .sws{display:flex;justify-content:center;gap:12px}
@@ -89,10 +89,28 @@ h1 em{font-style:normal;color:var(--gold)}
   .copy .cta{order:4}.copy .meta{order:5}
 }
 @media(prefers-reduced-motion:reduce){.anim .fog{animation:none;display:none}.anim h1 span{animation:none}}
+
+.vids{position:absolute;inset:0;z-index:1}
+.vids .poster,.vids .hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.vids .hv{opacity:0;transition:opacity 1.4s}.vids .hv.on{opacity:1}
+.vids.ready .poster{opacity:0;transition:opacity 1.4s}
+.glass svg{z-index:2;opacity:0;pointer-events:none;transition:opacity .6s}
+.glass .vshade{position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(to top,rgba(13,22,17,.55),transparent 38%)}
+.try .glass svg{opacity:1}
+.try .vids{opacity:0}
+.vids{transition:opacity .6s}
+.modes{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.md{border:1px solid rgba(243,237,226,.5);background:transparent;border-radius:999px;font-size:13px;padding:5px 20px;cursor:pointer;letter-spacing:.1em}
+.md[aria-pressed="true"]{background:var(--gold);color:#1a241e;border-color:var(--gold)}
+.md:focus-visible{outline:3px solid var(--ivory);outline-offset:3px}
+.ctl .sws,.ctl .lens,.ctl .cname{transition:opacity .4s,max-height .4s}
+.vmode .ctl .sws,.vmode .ctl .lens{display:none}
+.vmode .ctl .cname{display:none}
+.anim .fog{animation:wipe 2.4s var(--ease) .5s both}
 </style>
 </head>
 <body>
-<div class="demo">これはTotia 西宮北口様向けに作ったデモ（トップページのみ・非公開の見本）です。内容はホットペッパービューティーの掲載情報（2026年10月時点）をもとにしています。</div>
+<div class="demo">これはTotia 西宮北口様向けに作ったデモ（トップページのみ・非公開の見本）です。文章はホットペッパービューティーの掲載情報（2026年10月時点）をもとにしています。映像はAI生成のイメージです。</div>
 <header class="hero" id="hero">
   <div class="top"><div class="logo">Totia<small>NISHI-KITAGUCHI</small></div><div class="st">2026.05.01 GRAND OPEN<br>西宮北口駅 徒歩1分</div></div>
   <div class="copy">
@@ -102,8 +120,14 @@ h1 em{font-style:normal;color:var(--gold)}
     <a class="cta" id="cta" href="https://beauty.hotpepper.jp/slnH000800843/" target="_blank" rel="noopener">空き状況を見て、予約する</a>
     <p class="meta">平日 10:00–21:00｜土日祝 9:00–21:00｜年中無休<br>西宮北口駅 北出口から徒歩1分</p>
   </div>
-  <div class="mw">
+  <div class="mw vmode" id="mw">
     <div class="mirror"><div class="glass" id="glass">
+      <div class="vids" id="vids" aria-hidden="true">
+        <img class="poster" src="assets/p1.jpg" alt="">
+        <video class="hv" data-i="0" muted playsinline preload="auto"><source src="assets/v1.mp4" type="video/mp4"></video>
+        <video class="hv" data-i="1" muted playsinline preload="none"><source src="assets/v2.mp4" type="video/mp4"></video>
+        <video class="hv" data-i="2" muted playsinline preload="none"><source src="assets/v3.mp4" type="video/mp4"></video>
+      </div>
       <svg id="svg" viewBox="0 0 400 520" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
         <path id="back" fill="var(--hair)"/>
         <path id="body" d="M80 520 C92 440 150 404 200 404 C250 404 308 440 320 520 Z" fill="#101a15"/>
@@ -112,9 +136,10 @@ h1 em{font-style:normal;color:var(--gold)}
         <path id="fr" fill="var(--hair)"/>
       </svg>
       <div class="fog" aria-hidden="true"></div>
-      <div class="tagc" id="tagc">chocolate brown</div>
+      <div class="tagc" id="tagc">Totia nishi-kitaguchi</div>
     </div></div>
     <div class="ctl">
+      <div class="modes" role="group" aria-label="見かたを切りかえる"><button class="md" id="mv" aria-pressed="true">映像</button><button class="md" id="mt" aria-pressed="false">髪を試す</button></div>
       <div class="cname" id="cname" aria-live="polite">チョコレートブラウン ｜ ミディアム</div>
       <div class="sws" role="group" aria-label="髪の色をえらぶ">
         <button class="sw" style="--c:#4b2e22" aria-pressed="true" aria-label="チョコレートブラウン" data-c="#4b2e22" data-n="チョコレートブラウン" data-e="chocolate brown"></button>
@@ -129,7 +154,7 @@ h1 em{font-style:normal;color:var(--gold)}
       </div>
     </div>
   </div>
-  <p class="note">※ 鏡の中の人物は、イメージ図です。実際のスタイルではありません</p>
+  <p class="note">※ 映像・画像はAI生成のイメージです。お店の実際の写真ではありません</p>
 </header>
 
 <script>
@@ -153,6 +178,24 @@ h1 em{font-style:normal;color:var(--gold)}
   function label(){cname.textContent=cn+" ｜ "+ln}
   lens.forEach(function(b){b.addEventListener("click",function(){lens.forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");toY=+b.getAttribute("data-y");ln=b.textContent;label();if(reduce){Y=toY;draw(Y)}else requestAnimationFrame(tween)})});
   sws.forEach(function(b){b.addEventListener("click",function(){sws.forEach(function(x){x.setAttribute("aria-pressed","false")});b.setAttribute("aria-pressed","true");svg.style.setProperty("--hair",b.getAttribute("data-c"));document.getElementById("glass").style.setProperty("--hair",b.getAttribute("data-c"));cn=b.getAttribute("data-n");tagc.textContent=b.getAttribute("data-e");label()})});
+
+
+  /* 映像と「髪を試す」の切りかえ */
+  var mw=document.getElementById("mw"),mv=document.getElementById("mv"),mt=document.getElementById("mt");
+  function mode(v){mw.classList.toggle("vmode",v);mw.classList.toggle("try",!v);mv.setAttribute("aria-pressed",v?"true":"false");mt.setAttribute("aria-pressed",v?"false":"true");tagc.textContent=v?"Totia nishi-kitaguchi":"chocolate brown"}
+  mv.addEventListener("click",function(){mode(true)});mt.addEventListener("click",function(){mode(false)});
+  /* 映像：3本を順にゆっくり切りかえる（動きを減らす設定や、再生できないときは静止画） */
+  var vids=[].slice.call(document.querySelectorAll("#vids .hv")),vbox=document.getElementById("vids"),vc=-1,vfail=false;
+  function vshow(i){vc=i;vids.forEach(function(v,k){if(k!==i)v.classList.remove("on")});var v=vids[i];v.preload="auto";try{v.currentTime=0}catch(e){}var p=v.play();if(p&&p.catch)p.catch(function(){vfail=true});v.classList.add("on")}
+  if(!reduce){
+    vids.forEach(function(v,i){
+      v.addEventListener("playing",function(){vbox.classList.add("ready")});
+      v.addEventListener("timeupdate",function(){if(i!==vc||!v.duration)return;if(v.duration-v.currentTime<1.5&&!v._q){v._q=true;vshow((i+1)%vids.length);setTimeout(function(){v._q=false;v.pause()},1700)}});
+      v.addEventListener("ended",function(){if(i===vc)vshow((i+1)%vids.length)});
+    });
+    vshow(0);
+    if("IntersectionObserver" in window){new IntersectionObserver(function(es){es.forEach(function(e){var v=vids[vc];if(!v)return;if(e.isIntersecting){v.play&&v.play().catch(function(){})}else{v.pause()}})},{threshold:.1}).observe(vbox)}
+  }
 
   /* 鏡の光：指・マウスの動きについてくる（操作がなければ、ゆっくり往復） */
   var used=false,t0=performance.now(),glass=document.getElementById("glass");
